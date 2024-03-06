@@ -100,10 +100,4 @@ export const usuariosRegistrados = [
     }
 ];
 
-// Convertir el array a una cadena JSON
-const usuariosJSON = JSON.stringify(usuariosRegistrados);
-
-// Guardar la cadena JSON en el localStorage
-localStorage.setItem('usuarios', usuariosJSON);
-
 

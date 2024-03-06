@@ -21,7 +21,7 @@ export const comentarios ={
          html += comentario(item.autor, item.fecha, item.comentario) 
         
        })
-       console.log(html)
+      
        document.querySelector('#comentariosText').innerHTML = html
      
 

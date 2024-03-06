@@ -1,4 +1,6 @@
 import { tickets } from "../bd.js";
+import { vistaMain } from "./vistaComentarios.js";
+
 
 export const panel ={
   template: `<main class="container mt-5">
@@ -60,8 +62,8 @@ pintarTickets: ()=>{
       <td>${tickets[i].Ordenador}</td>
       <td>${tickets[i].Descripcion}</td>
       <td>${tickets[i].Alumno}</td>
-      <td><button id="btnComentar" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
-      <td><button id="btnEliminar" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      <td><button id="btnComentarResueltos" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
+      <td><button id="btnEliminarResueltos" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
      
     `;
     const ticketHTMLPendientes = ` 
@@ -74,10 +76,11 @@ pintarTickets: ()=>{
       <td>${tickets[i].Alumno}</td>
       <td><button id="resolver" type="button" class="btn btn-success">Resolver</button></td>
       <td><button id="btnEditar" type="button" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button></td>
-      <td><button id="btnComentar" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
-      <td><button id="btnEliminar" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      <td><button id="btnComentarPendientes" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
+      <td><button id="btnEliminarPendientes" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
     
-    `;
+    `
+
     //en ticketHTML lo que hago es que de cada objeto, recoja las propiedades con sus valores
     
     if (tickets[i].estat === 'Resuelto') {
@@ -86,10 +89,29 @@ pintarTickets: ()=>{
       html2 += `<tr>${ticketHTMLPendientes}</tr>`; //se meterán todos lo que no están resueltos
     }
   }
+
   
   document.querySelector('#ticketsResueltos').innerHTML = html1; //inyecto todos los tickets resueltos a través del ID en el HTML
   document.querySelector('#ticketsPendientes').innerHTML = html2; //inyecto todos los tickets no resueltos a través del ID en el HTML
+
+  
+  document.querySelector('#btnComentarPendientes').addEventListener('click' ,()=>{
+  console.log('dandole al botón para ver los comentarios');
+  document.querySelector('main').innerHTML = vistaMain.template
+  vistaMain.script() 
+  })
+
+  document.querySelector('#btnComentarResueltos').addEventListener('click' ,()=>{
+  console.log('dandole al botón para ver los comentarios');
+  document.querySelector('main').innerHTML = vistaMain.template
+  vistaMain.script() 
+  })
+ 
+
+  
 }
+
+
 
 }
 

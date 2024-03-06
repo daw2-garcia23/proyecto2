@@ -4,9 +4,6 @@ import { panel } from "../vistas/panel.js"
 import { registro } from "../vistas/registro.js"
 import { vistaMain } from "../vistas/vistaComentarios.js"
 
-
-
-
 export const header = {
     template: `<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse d-flex justify-content-center align-items-center" id="navbarSupportedContent">
@@ -27,8 +24,16 @@ export const header = {
         <div class="ps-2">
             <button id="btnLog" class="btn btn-outline-success my-2 my-sm-0 " type="submit">Login</button>
         </div>
+        <div class="ps-2" id="logout">
+        
+        </div>
+    </div>
+    
+    <div id="correoUsuario" class="d-flex justify-content-end pe-5">
+                
     </div>
 </nav>
+
 `,
 script: () =>{
 
@@ -42,11 +47,14 @@ script: () =>{
     document.querySelector('#btnReg').addEventListener('click', ()=>{
     console.log('hola desde el boton de registro')
     document.querySelector('main').innerHTML=registro.template
+    registro.script()
     })
+  
        
     document.querySelector('#btnLog').addEventListener('click', ()=>{
     console.log('hola desde el boton de login')
     document.querySelector('main').innerHTML=login.template
+    login.script()
     
        })
     
@@ -54,8 +62,9 @@ script: () =>{
     console.log('hola desde el boton de panel')
     document.querySelector('main').innerHTML=panel.template
     panel.pintarTickets() 
-        
            })
+
+ 
     
     
     }

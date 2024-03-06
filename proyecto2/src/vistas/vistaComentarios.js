@@ -1,13 +1,14 @@
 
 
 import { comentarios } from "../componentes/comentarios.js"
+import { panel } from "./panel.js"
 
 export const vistaMain = {
     template: 
     `
    
     <div class="d-flex">
-      <h1>Comentarios</h1><button class="btn btn-link ms-auto"> < Volver</button>
+      <h1>Comentarios</h1><button class="btn btn-link ms-auto" id="volver">Volver</button>
     </div>
 
 
@@ -28,6 +29,11 @@ export const vistaMain = {
   
     `,
     script: ()=>{
+      document.querySelector('#volver').addEventListener('click', ()=>{
+        document.querySelector('main').innerHTML= panel.template
+        panel.pintarTickets()
+  
+      })
       document.querySelector('#comentariosTexto').innerHTML = comentarios.template
       comentarios.script()
         
