@@ -249,7 +249,7 @@ const panel = {
       <td>${tickets[i].Descripcion}</td>
       <td>${tickets[i].Alumno}</td>
       <td><button id="btnComentarResueltos" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
-      <td><button id="btnEliminarResueltos" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      <td><button type="button" class="btnEliminarResueltos btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
      
     `;
       const ticketHTMLPendientes = ` 
@@ -262,8 +262,8 @@ const panel = {
       <td>${tickets[i].Alumno}</td>
       <td><button id="resolver" type="button" class="btn btn-success">Resolver</button></td>
       <td><button id="btnEditar" type="button" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button></td>
-      <td><button id="btnComentarPendientes" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
-      <td><button id="btnEliminarPendientes" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      <td><button type="button" class="btnComentarPendientes btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
+      <td><button type="button" class="btnEliminarPendientes btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
     
     `;
       if (tickets[i].estat === "Resuelto") {
@@ -274,11 +274,6 @@ const panel = {
     }
     document.querySelector("#ticketsResueltos").innerHTML = html1;
     document.querySelector("#ticketsPendientes").innerHTML = html2;
-    document.querySelector("#btnComentarPendientes").addEventListener("click", () => {
-      console.log("dandole al botón para ver los comentarios");
-      document.querySelector("main").innerHTML = vistaMain.template;
-      vistaMain.script();
-    });
     document.querySelector("#btnComentarResueltos").addEventListener("click", () => {
       console.log("dandole al botón para ver los comentarios");
       document.querySelector("main").innerHTML = vistaMain.template;
@@ -305,7 +300,7 @@ const registro = {
                               </div>
                               <div class="mb-3">
                                   <label for="email" class="form-label" required>Correo electrónico</label>
-                                  <input type="email" class="form-control" id="emailRegistro" placeholder="usuario@example.com">
+                                  <input type="email" class="form-control" id="emailRegistro" placeholder="usuario@example.com" required>
                               </div>
                               <div class="mb-3">
                                   <label for="contraseña" class="form-label" required>Contraseña</label>
@@ -431,9 +426,36 @@ const login = {
             document.querySelector("#btnLogout").style.display = "none";
             document.querySelector("#correoUsuario").innerHTML = "";
           });
-          document.querySelector("#btnEliminarResueltos").addEventListener("click", () => {
-            console.log("Estas eliminando un comentario");
-            tickets.findIndex((ticket) => ticket.codigo === codigo);
+          document.querySelector("#ticketsResueltos").addEventListener("click", (event2) => {
+            console.log("eliminando comentarios resueltos");
+            const boton = event2.target.closest(".btnEliminarResueltos");
+            if (boton) {
+              const fila = boton.closest("tr");
+              if (fila) {
+                fila.remove();
+              }
+            }
+          });
+          document.querySelector("#ticketsPendientes").addEventListener("click", (event2) => {
+            console.log("eliminando comentarios pendientes");
+            const boton = event2.target.closest(".btnEliminarPendientes");
+            if (boton) {
+              const fila = boton.closest("tr");
+              if (fila) {
+                fila.remove();
+              }
+            }
+          });
+          document.querySelector("#ticketsPendientes").addEventListener("click", (event2) => {
+            console.log("mostrando comentarios pendiente");
+            const boton = event2.target.closest(".btnComentarPendientes");
+            if (boton) {
+              const fila = boton.closest("tr");
+              if (fila) {
+                document.querySelector("main").innerHTML = vistaMain.template;
+                vistaMain.script();
+              }
+            }
           });
         });
       } else {
