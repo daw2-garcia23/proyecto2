@@ -20,7 +20,7 @@ export const registro = {
                               </div>
                               <div class="mb-3">
                                   <label for="email" class="form-label" required>Correo electrónico</label>
-                                  <input type="email" class="form-control" id="emailRegistro" placeholder="usuario@example.com">
+                                  <input type="email" class="form-control" id="emailRegistro" placeholder="usuario@example.com" required>
                               </div>
                               <div class="mb-3">
                                   <label for="contraseña" class="form-label" required>Contraseña</label>
@@ -37,6 +37,7 @@ export const registro = {
       </div>
   `,
   script: () => {
+    
     document.querySelector('#btnPanel').style.display = 'none'; //ocultamos poder ir al panel
     document.querySelector('#btnComentarios').style.display = 'none'; //ocultamos poder ir a comentarios
 

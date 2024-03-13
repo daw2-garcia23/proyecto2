@@ -24,7 +24,9 @@ export const comentarios ={
       
        document.querySelector('#comentariosText').innerHTML = html
      
-
+       
 
     }
+    
+    
 }

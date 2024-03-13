@@ -49,8 +49,8 @@ export const panel ={
 
 pintarTickets: ()=>{
     console.log('vamos a pintar los comentarios')
-  let html1 = ''; // tickets resueltos
-  let html2 = ''; // pendientes
+    let html1 = ''; // tickets resueltos
+    let html2 = ''; // pendientes
   
   for (let i = 0; i < tickets.length; i++) { //hago un bucle que recorra los objetos sin entrar en ellos del array tickets
     const ticketHTMLResueltos = ` 
@@ -62,8 +62,9 @@ pintarTickets: ()=>{
       <td>${tickets[i].Ordenador}</td>
       <td>${tickets[i].Descripcion}</td>
       <td>${tickets[i].Alumno}</td>
-      <td><button id="btnComentarResueltos" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
-      <td><button id="btnEliminarResueltos" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      <td><button type="button" class="btnComentarResueltos btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
+      <td><button type="button" class="btnEliminarResueltos btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      
      
     `;
     const ticketHTMLPendientes = ` 
@@ -75,9 +76,10 @@ pintarTickets: ()=>{
       <td>${tickets[i].Descripcion}</td>
       <td>${tickets[i].Alumno}</td>
       <td><button id="resolver" type="button" class="btn btn-success">Resolver</button></td>
-      <td><button id="btnEditar" type="button" class="btn btn-warning"><i class="fa-solid fa-pen"></i></button></td>
-      <td><button id="btnComentarPendientes" type="button" class="btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
-      <td><button id="btnEliminarPendientes" type="button" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      <td><button id="btnEditar" type="button" class="btnEditarPendientes btn btn-warning"><i class="fa-solid fa-pen"></i></button></td>
+      <td><button type="button" class="btnComentarPendientes btn btn-primary"><i class="fa-regular fa-comment"></i></button></td>
+      <td><button type="button" class="btnEliminarPendientes btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></td>
+      
     
     `
 
@@ -95,24 +97,29 @@ pintarTickets: ()=>{
   document.querySelector('#ticketsPendientes').innerHTML = html2; //inyecto todos los tickets no resueltos a través del ID en el HTML
 
   
-  document.querySelector('#btnComentarPendientes').addEventListener('click' ,()=>{
-  console.log('dandole al botón para ver los comentarios');
-  document.querySelector('main').innerHTML = vistaMain.template
-  vistaMain.script() 
-  })
+  // Agregar evento a los botones de comentar resueltos
+  const btnComentarResueltos = document.querySelectorAll('.btnComentarResueltos');
+  btnComentarResueltos.forEach(btn => {
+    btn.addEventListener('click', () => {
+      console.log('Dandole al botón para ver los comentarios de los tickets resueltos');
+      document.querySelector('main').innerHTML = vistaMain.template;
+      vistaMain.script();
+    });
+  });
 
-  document.querySelector('#btnComentarResueltos').addEventListener('click' ,()=>{
-  console.log('dandole al botón para ver los comentarios');
-  document.querySelector('main').innerHTML = vistaMain.template
-  vistaMain.script() 
-  })
- 
+  // Agregar evento a los botones de comentar pendientes
+  const btnComentarPendientes = document.querySelectorAll('.btnComentarPendientes');
+  btnComentarPendientes.forEach(btn => {
+    btn.addEventListener('click', () => {
+      console.log('Dandole al botón para ver los comentarios de los tickets pendientes');
+      document.querySelector('main').innerHTML = vistaMain.template;
+      vistaMain.script();
+    });
+  });
 
-  
+
+
 }
-
-
-
 }
 
 

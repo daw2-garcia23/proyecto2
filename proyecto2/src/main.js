@@ -10,6 +10,5 @@ header.script()
 document.querySelector('main').innerHTML = panel.template
 panel.pintarTickets() 
 
-    
 
 

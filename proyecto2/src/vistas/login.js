@@ -82,13 +82,72 @@ export const login = {
                     document.querySelector('#correoUsuario').innerHTML = '' //dejamos de mostrar el correo en el header
                     })
 
-                    //Eliminar comentarios
-                    document.querySelector('#btnEliminarResueltos').addEventListener('click',()=>{
-                        console.log('Estas eliminando un comentario');
-                        const borrarTicket = tickets.findIndex(ticket => ticket.codigo === codigo);
-                })  
+                    //Resolver tickets:
+                     // evento
+                        const btnResolverArray = document.querySelectorAll('#resolver');
+                        btnResolverArray.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const tr = btn.closest('tr'); // Obtener el tr padre 
+
+                            // Mover el tr a la tabla de tickets resueltos
+                            document.querySelector('#ticketsResueltos').appendChild(tr);
+                            
+                            // Ocultar botones Resolver y Editar del ticket resuelto
+                            const btnResolver = tr.querySelector('#resolver');
+                            const btnEditar = tr.querySelector('#btnEditar');
+                            btnResolver.style.display = 'none'; // Ocultar botón Resolver
+                            btnEditar.style.display = 'none'; // Ocultar botón Editar
+                        });
+                        });
+
+                    //Eliminar comentarios resueltos
+                    document.querySelector('#ticketsResueltos').addEventListener('click', (event) => {
+                        console.log('eliminando comentarios resueltos');
+                        // Este evento se activa cuando se hace clic en cualquier parte del tbody
+                        const boton = event.target.closest('.btnEliminarResueltos'); // Encuentra el btn mas cercano que tenga la clase 'btnEliminarResueltos'
+                        
+                        if (boton) {
+                            const fila = boton.closest('tr'); // Encuentra el tr proximo del btn
+                    
+                            if (fila) {
+                                fila.remove(); // Elimina la fila
+                            }
+                        }
+                    });
+
+                    //Eliminar comentarios pendientes
+                    document.querySelector('#ticketsPendientes').addEventListener('click', (event) => {
+                        console.log('eliminando comentarios pendientes');
+                        // Este evento se activa cuando se hace clic en cualquier parte del tbody
+                        const boton = event.target.closest('.btnEliminarPendientes'); // Encuentra el btn mas cercano que tenga la clase 'btnEliminarResueltos'
+                        
+                        if (boton) {
+                            const fila = boton.closest('tr'); // Encuentra el tr proximo del btn
+                    
+                            if (fila) {
+                                fila.remove(); // Elimina la fila
+                            }
+                        }
+                    });
+
+                    //Mostrar los comentarios
+                    document.querySelector('#ticketsPendientes').addEventListener('click', (event) => {
+                        console.log('mostrando comentarios pendiente');
+                        // Este evento se activa cuando se hace clic en cualquier parte del tbody
+                        const boton = event.target.closest('.btnComentarPendientes'); // Encuentra el btn mas cercano que tenga la clase 'btnEliminarResueltos'
+                        
+                        if (boton) {
+                            const fila = boton.closest('tr'); // Encuentra el tr proximo del btn
+                    
+                            if (fila) {
+                                document.querySelector('main').innerHTML = vistaMain.template //carga en el main el template
+                                vistaMain.script() //junto con su funcionabilidad
+                            }
+                        }
+                    });
                     
                   })
+
             }else{ //Si el usuario no existe, mostramos este error
                 Swal.fire({
                     icon: "error",
